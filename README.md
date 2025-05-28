@@ -16,6 +16,7 @@ TaskWeaver is an AI-powered web automation and research assistant that helps use
 - MongoDB database
 - Google Gemini API key
 - HackMD API token
+- Google Chrome browser installed
 
 ## Setup
 
@@ -30,15 +31,34 @@ cd TaskWeaver
 pip install -r requirements.txt
 ```
 
-3. Create a `.env` file with your credentials:
-```
+3. Create a `.env` file in the project root directory with the following environment variables:
+```env
+# Google Gemini API Configuration
 GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL_ID=your_model_id
+
+# MongoDB Configuration
 MONGODB_URI=your_mongodb_uri
-HACKMD_API_TOKEN=your_hackmd_token
+
+# Firecrawl API Configuration
+FIRECRAWL_API_KEY=your_firecrawl_api_key
 ```
 
-4. Run the application:
+4. Set up Chrome for browser automation (Windows PowerShell):
+```powershell
+# Stop any running Chrome processes
+Stop-Process -Name chrome -Force -ErrorAction SilentlyContinue
+
+# Create Chrome debug profile directory
+mkdir "C:\Temp\ChromeDebugProfile"
+
+# Launch Chrome with remote debugging enabled
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" `
+  --remote-debugging-port=9223 `
+  --user-data-dir="C:\Temp\ChromeDebugProfile"
+```
+
+5. Run the application:
 ```bash
 python agno_agent.py
 ```
